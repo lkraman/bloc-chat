@@ -1,4 +1,14 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const Button = styled.button`
+  color: #2A1657;
+  padding: 0.25rem 1rem;
+  border: solid 2px #2A1657;
+  border-radius: 3px;
+  margin: 0.5rem;
+  font-size: 1rem;
+`;
 
 class MessageList extends Component {
   constructor(props) {
@@ -43,15 +53,20 @@ class MessageList extends Component {
 
     const messageBar = (
       <form onSubmit={this.createMessage}>
-        <input type="text" value={this.state.content} placeholder="Enter Message" onChange={this.handleChange}/>
-        <input type="submit" value="Submit" />
+        <input
+        type="text"
+        value={this.state.content}
+        placeholder="Enter Message"
+        onChange={this.handleChange}
+        />
+      <Button>Submit</Button>
       </form>
     );
 
     const messageList = (
       this.state.messages.map((message) => {
         if (message.roomId === activeRoom) {
-          return <li key={message.key}>{message.content}</li>
+          return <div key={message.key}>{message.content}</div>
         }
         return null;
       })
@@ -60,7 +75,7 @@ class MessageList extends Component {
     return(
       <div>
         <div>{messageBar}</div>
-        <ul>{messageList}</ul>
+        <div>{messageList}</div>
       </div>
     );
   }
