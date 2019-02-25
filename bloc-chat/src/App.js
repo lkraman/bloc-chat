@@ -68,8 +68,23 @@ render() {
       : (null)
       }
     </AppContainer>
+    <div className="container-fluid">
+      <header className="header">{this.state.activeRoom.title || "Select A Room"}</header>
+      <div className="flex-column" id="flex1">
+      <User firebase={firebase} setUser={this.setUser} />
+      </div>
+      <div className="flex-column" id="flex2">
+      <RoomList firebase={firebase} activeRoom={this.activeRoom} />
+      </div>
+      <div className="flex-column" id="flex3">
+      { showMessages ?
+      (<MessageList firebase={firebase} activeRoom={this.state.activeRoom.key}/>)
+      : (null)
+    }</div>
+    </div>
   );
 }
 }
 
  export default App;
+export default App;

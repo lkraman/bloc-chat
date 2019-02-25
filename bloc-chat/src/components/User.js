@@ -10,6 +10,7 @@ const Button = styled.button`
   margin: 0.5rem;
   font-size: 1rem;
 `;
+import fire from '../App';
 
 class User extends Component {
   constructor(props) {
@@ -19,6 +20,19 @@ class User extends Component {
     }
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
+  }
+
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        this.setState({ user });
+        localStorage.setItem('user', user.uid);
+      } else {
+        this.setState({ user:null });
+        localStorage.removeItem('user');
+      }
+    });
   }
 
   login() {
@@ -56,6 +70,8 @@ class User extends Component {
       <div>
          <Button onClick={this.login}>Sign In</Button>
          <Button onClick={this.logout}>Sign Out</Button>
+         <button onClick={this.login}>Sign In</button>
+         <button onClick={this.logout}>Sign Out</button>
          <section className="show-username">
             Sign In As:
             {this.props.user ? this.props.user.displayName : 'Guest'}

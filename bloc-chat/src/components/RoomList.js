@@ -55,6 +55,7 @@ class RoomList extends Component {
         onChange={this.handleChange}
         />
       <Button>Submit</Button>
+      <button>Submit</button>
       </form>
     );
 
