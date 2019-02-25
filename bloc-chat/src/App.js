@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
+import User from './components/User';
 
 import * as firebase from 'firebase';
 
@@ -26,19 +26,25 @@ activeRoom(room) {
   this.setState({ activeRoom: room })
 }
 
-  render() {
-    const showMessages = this.state.activeRoom;
-    return (
-      <div>
-        <h1>{this.state.activeRoom.title || "Select A Room"}</h1>
-        <RoomList firebase={firebase} activeRoom={this.activeRoom} />
-        { showMessages ?
-        (<MessageList firebase={firebase} activeRoom={this.state.activeRoom.key}/>)
-        : (null)
-        }
+render() {
+  const showMessages = this.state.activeRoom;
+  return (
+    <div className="container-fluid">
+      <header className="header">{this.state.activeRoom.title || "Select A Room"}</header>
+      <div className="flex-column" id="flex1">
+      <User firebase={firebase} setUser={this.setUser} />
       </div>
-    );
-  }
+      <div className="flex-column" id="flex2">
+      <RoomList firebase={firebase} activeRoom={this.activeRoom} />
+      </div>
+      <div className="flex-column" id="flex3">
+      { showMessages ?
+      (<MessageList firebase={firebase} activeRoom={this.state.activeRoom.key}/>)
+      : (null)
+    }</div>
+    </div>
+  );
+}
 }
 
- export default App;
+export default App;

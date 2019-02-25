@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import './RoomList.css';
+
+
+
 
 class RoomList extends Component {
   constructor(props) {
@@ -31,16 +35,23 @@ class RoomList extends Component {
     this.props.activeRoom(room);
   }
 
+
+
   render() {
     const roomForm = (
       <form onSubmit={this.createRoom}>
-        <input type="text" value={this.state.title} placeholder="Enter Room Name" onChange={this.handleChange}/>
-        <input type="submit" value="Submit" />
+        <input
+        type="text"
+        value={this.state.title}
+        placeholder="Enter Room Name"
+        onChange={this.handleChange}
+        />
+      <button>Submit</button>
       </form>
     );
 
     const roomList = this.state.rooms.map((room) =>
-      <li key={room.key} onClick={(e) => this.selectRoom(room, e)}>{room.title}</li>
+      <div key={room.key} onClick={(e) => this.selectRoom(room, e)}>{room.title}</div>
     );
 
     return(
