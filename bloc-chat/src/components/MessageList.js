@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
-const Button = styled.button`
-  color: #2A1657;
-  padding: 0.25rem 1rem;
-  border: solid 2px #2A1657;
-  border-radius: 3px;
-  margin: 0.5rem;
-  font-size: 1rem;
-`;
 
 class MessageList extends Component {
   constructor(props) {
     super(props);
-      this.state = { username: "", content: "", sentAt: "", roomId: "", messages: []}
+      this.state = { messages:  [{username: "", content: "", sentAt: "", roomId: ""},], newMessage:""};
       this.messagesRef = this.props.firebase.database().ref("messages");
       this.handleChange = this.handleChange.bind(this);
       this.createMessage = this.createMessage.bind(this);
@@ -21,24 +12,20 @@ class MessageList extends Component {
 
   handleChange(e) {
     e.preventDefault();
-    this.setState({
-      username: "user",
-      content: e.target.value,
-      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      roomId: this.props.activeRoom
-    });
+    this.setState({newMessage: e.target.value});
   }
 
   createMessage(e) {
-    e.preventDefault();
-    this.messagesRef.push({
-      username: this.state.username,
-      content: this.state.content,
-      sentAt: this.state.sentAt,
-      roomId: this.state.roomId
-    });
-    this.setState({ username: "", content: "", sentAt: "", roomId: "" });
-  }
+      e.preventDefault();
+      this.messagesRef.push({
+        username: this.props.user ? this.props.user.displayName : 'Guest',
+        content: this.state.newMessage,
+        sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+        roomId: this.props.activeRoomId,
+      })
+      this.setState({newMessage: ''});
+    }
+
 
   componentDidMount() {
     this.messagesRef.on('child_added', snapshot => {
@@ -48,36 +35,40 @@ class MessageList extends Component {
     });
   }
 
-  render() {
-    const activeRoom = this.props.activeRoom;
+    formatTime(time) {
+      const date = new Date(time);
+      const hour = date.getHours();
+      const min = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+      const sec = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+      const newTime = hour + ':' + min + ':' + sec;
+      return newTime;
+    }
 
-    const messageBar = (
-      <form onSubmit={this.createMessage}>
-        <input
-        type="text"
-        value={this.state.content}
-        placeholder="Enter Message"
-        onChange={this.handleChange}
-        />
-      <Button>Submit</Button>
-      </form>
-    );
 
-    const messageList = (
-      this.state.messages.map((message) => {
-        if (message.roomId === activeRoom) {
-          return <div key={message.key}>{message.content}</div>
-        }
-        return null;
-      })
-    );
-
-    return(
-      <div>
-        <div>{messageBar}</div>
-        <div>{messageList}</div>
-      </div>
-    );
+    render() {
+      return (
+        <section className="messages">
+          {this.state.messages
+            .filter(messages => messages.roomId === this.props.activeRoomId)
+            .map(messages => (
+              <div className="message-group" key={messages.key}>
+                <div>{messages.username}</div>
+                <div>{messages.content}</div>
+                <div>{this.formatTime(messages.sentAt)}</div>
+              </div>
+            ))}
+          <form className="add-message" onSubmit={this.createMessage}>
+            <input
+              type="text"
+              placeholder="Write Your Message Here"
+              value={this.state.newMessage}
+              onChange={this.handleChange}
+            />
+            <input type="submit" value="Send" />
+          </form>
+        </section>
+      );
+    }
   }
-}
-export default MessageList;
+
+  export default MessageList;
