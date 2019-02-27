@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import { Container, Row, Col } from 'react-awesome-styled-grid';
+
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 import User from './components/User';
 
 import './App.css';
 import * as firebase from 'firebase';
-import fire from 'firebase';
+
 
 var config = {
   apiKey: "AIzaSyAfTbKtXZUD0PZzJxGECO3unfiv10ZqX0w",
@@ -19,33 +18,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-const AppContainer = styled.div`
- text-align: center;
-`;
-
-const AppHeader = styled.header`
- background-color: #442F74;
- height: 100px;
- padding: 20px;
- color: white;
-`;
-
-const AppTitle = styled.h1`
-   font-size: 1.5em;
-`;
-
-const AppLogo = styled.img`
- animation: App-logo-spin infinite 20s linear;
- height: 80px;
- @keyframes App-logo-spin {
-   from { transform: rotate(0deg); }
-   to { transform: rotate(360deg); }
- }
-`;
-
-const AppIntro = styled.p`
- font-size: large;
-`;
 
 class App extends Component {
   constructor(props) {

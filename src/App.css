@@ -1,10 +1,13 @@
 
 body {
-  font-family: 'Chivo', sans-serif;
+  font-family: sans-serif;
+background-image: linear-gradient(0deg, #51d641 0%, #1caff3 71%);
+height: 100vh;
 }
 
 .app-title {
   text-align: center;
+  font-family: 'Chivo', sans-serif;
 }
 
 .rows {
@@ -15,8 +18,10 @@ body {
 }
 
 .room-list {
-  background-color: grey;
-  border: solid gray;
+
+  color: white;
+  background-color: #0e2887;
+  border: #0e2887;
   border-radius: 5px;
   width: 30%;
   padding: 0.5em;
@@ -24,8 +29,9 @@ body {
 }
 
 .message-list {
-  background-color: grey;
-  border: solid gray;
+  color: white;
+  background-color: #0e2887;
+  border: #0e2887;
   border-radius: 5px;
   width: 70%;
   padding: 0.5em;

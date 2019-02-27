@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
-
-const Button = styled.button`
-  color: #2A1657;
-  padding: 0.25rem 1rem;
-  border: solid 2px #2A1657;
-  border-radius: 3px;
-  margin: 0.5rem;
-  font-size: 1rem;
-`;
 import fire from '../App';
 
 
@@ -44,7 +34,6 @@ class User extends Component {
    })
    .catch(function(error) {
        console.log(error);
-       console.log('Failed to Sign in with Google');
     });
  }
 
@@ -54,7 +43,6 @@ class User extends Component {
   })
   .catch(function(error) {
        console.log(error);
-       console.log('Failed to Sign Out');
   });
 }
 
@@ -68,19 +56,15 @@ class User extends Component {
 
   render() {
     return(
-      <div>
-<<<<<<< HEAD
-         <Button onClick={this.login}>Sign In</Button>
-         <Button onClick={this.logout}>Sign Out</Button>
-         <button onClick={this.login}>Sign In</button>
-         <button onClick={this.logout}>Sign Out</button>
-=======
-         <button onClick={this.signIn}>Sign In</button>
-         <button onClick={this.signOut}>Sign Out</button>
->>>>>>> checkpoint-bloc-chat-set-username
-         <section className="show-username">
+      <div className="user">
+        <section className="btn-group">
+         <button type="button" onClick={this.signIn}>Sign In with Google</button>
+         <button type="button" onClick={this.signOut}>Sign Out</button>
+
+         <section className="display-username">
             Sign In As:
             {this.props.user ? this.props.user.displayName : 'Guest'}
+          </section>
           </section>
        </div>
 

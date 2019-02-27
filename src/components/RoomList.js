@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-
-
-const Button = styled.button`
-  color: #2A1657;
-  padding: 0.25rem 1rem;
-  border: solid 2px #2A1657;
-  border-radius: 3px;
-  margin: 0.5rem;
-  font-size: 1rem;
-`;
-
-
+import './RoomList.css';
 class RoomList extends Component {
   constructor(props) {
     super(props);
-      this.state = {title: "", rooms: []};
+      this.state = {
+        title: "",
+        rooms: [],
+        visible: false,
+      };
       this.roomsRef = this.props.firebase.database().ref("rooms");
       this.handleChange = this.handleChange.bind(this);
       this.createRoom = this.createRoom.bind(this);
@@ -44,19 +36,16 @@ class RoomList extends Component {
   }
 
 
-
   render() {
     const roomForm = (
-      <form onSubmit={this.createRoom}>
-        <input
+      <form className="room-form" onSubmit={this.createRoom}>
+        <input className="input-fields"
         type="text"
         value={this.state.title}
         placeholder="Enter Room Name"
         onChange={this.handleChange}
         />
-      <Button>Submit</Button>
-      <button>Submit</button>
-
+      <button className="room-button" id="room-button">Submit</button>
       </form>
     );
 
@@ -64,13 +53,16 @@ class RoomList extends Component {
       <div key={room.key} onClick={(e) => this.selectRoom(room, e)}>{room.title}</div>
     );
 
+
     return(
       <div>
         <div>{roomForm}</div>
         <ul>{roomList}</ul>
       </div>
     );
-  }
+
+
+}
 }
 
 export default RoomList;
