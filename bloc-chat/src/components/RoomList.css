@@ -1,0 +1,48 @@
+.add-room-button {
+  color: red;
+  width: 50%;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 1em;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  padding: 10px 24px;
+  border: none;
+}
+
+.add-room-button:hover {
+  background-color: #4caf50;
+  color: white;
+}
+
+.add-room-form {
+  margin: 1em;
+  margin-top: 3em;
+  margin-right: 1em;
+  text-align: center;
+}
+
+.form-field {
+  margin: 1em;
+  width: 50%;
+}
+
+.close-modal-button {
+  margin-left: 45%;
+}
+
+.submit-button {
+  color: red;
+  width: 35%;
+  margin-left: 7%;
+  margin-bottom: 3em;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  padding: 10px 24px;
+  border: none;
+}
+
+.submit-button:hover {
+  background-color: #4caf50;
+  color: white;
+}

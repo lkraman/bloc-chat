@@ -12,14 +12,15 @@ const Button = styled.button`
 `;
 import fire from '../App';
 
+
 class User extends Component {
   constructor(props) {
     super(props)
     this.state = {
       user: null
     }
-    this.login = this.login.bind(this)
-    this.logout = this.logout.bind(this)
+    this.signIn = this.signIn.bind(this)
+    this.signOut = this.signOut.bind(this)
   }
 
   authListener() {
@@ -35,7 +36,7 @@ class User extends Component {
     });
   }
 
-  login() {
+  signIn() {
     const provider = new this.props.firebase.auth.GoogleAuthProvider();
     this.props.firebase.auth().signInWithPopup(provider).then((result) => {
     const user = result.user;
@@ -47,8 +48,8 @@ class User extends Component {
     });
  }
 
-  logout() {
-    this.props.firebase.auth().logout().then(() => {
+  signOut() {
+    this.props.firebase.auth().signOut().then(() => {
     this.props.setUser(null);
   })
   .catch(function(error) {
@@ -68,10 +69,15 @@ class User extends Component {
   render() {
     return(
       <div>
+<<<<<<< HEAD
          <Button onClick={this.login}>Sign In</Button>
          <Button onClick={this.logout}>Sign Out</Button>
          <button onClick={this.login}>Sign In</button>
          <button onClick={this.logout}>Sign Out</button>
+=======
+         <button onClick={this.signIn}>Sign In</button>
+         <button onClick={this.signOut}>Sign Out</button>
+>>>>>>> checkpoint-bloc-chat-set-username
          <section className="show-username">
             Sign In As:
             {this.props.user ? this.props.user.displayName : 'Guest'}

@@ -5,7 +5,9 @@ import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 import User from './components/User';
 
+import './App.css';
 import * as firebase from 'firebase';
+import fire from 'firebase';
 
 var config = {
   apiKey: "AIzaSyAfTbKtXZUD0PZzJxGECO3unfiv10ZqX0w",
@@ -48,43 +50,50 @@ const AppIntro = styled.p`
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {activeRoom: ""};
-    this.activeRoom = this.activeRoom.bind(this);
+
+    this.state = {
+      activeRoom: '',
+      activeRoomId: '',
+      user: null,
+    };
+    this.setActiveRoom = this.setActiveRoom.bind(this);
+    this.setUserName = this.setUserName.bind(this);
   }
 
-activeRoom(room) {
-  this.setState({ activeRoom: room })
-}
+  setActiveRoom(room) {
+    this.setState({
+      activeRoom: room.name,
+      activeRoomId: room.key,
+    });
+  }
 
-render() {
-  const showMessages = this.state.activeRoom;
-  return (
-    <AppContainer>
-      <AppHeader>{this.state.activeRoom.title || "Select A Room"}</AppHeader>
-      <User firebase={firebase} setUser={this.setUser} />
-      <RoomList firebase={firebase} activeRoom={this.activeRoom} />
-      { showMessages ?
-      (<MessageList firebase={firebase} activeRoom={this.state.activeRoom.key}/>)
-      : (null)
-      }
-    </AppContainer>
-    <div className="container-fluid">
-      <header className="header">{this.state.activeRoom.title || "Select A Room"}</header>
-      <div className="flex-column" id="flex1">
-      <User firebase={firebase} setUser={this.setUser} />
-      </div>
-      <div className="flex-column" id="flex2">
-      <RoomList firebase={firebase} activeRoom={this.activeRoom} />
-      </div>
-      <div className="flex-column" id="flex3">
-      { showMessages ?
-      (<MessageList firebase={firebase} activeRoom={this.state.activeRoom.key}/>)
-      : (null)
-    }</div>
-    </div>
-  );
-}
+  setUserName(user) {
+    this.setState({
+      user: user,
+    });
+  }
+
+  render() {
+    return (
+      <main className="wrapper">
+        <header className="app-title">
+          <h1>Bloc Chat</h1>
+          <h2>Current Room: {this.state.activeRoom}</h2>
+          <section>
+            <User firebase={firebase} user={this.state.user} setUserName={this.setUserName} />
+          </section>
+        </header>
+        <section className="rows">
+          <section className="room-list">
+            <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom} />
+          </section>
+          <section className="message-list">
+            <MessageList firebase={firebase} activeRoomId={this.state.activeRoomId} />
+          </section>
+        </section>
+      </main>
+    );
+  }
 }
 
  export default App;
-export default App;
