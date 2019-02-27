@@ -2,20 +2,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
-=======
 
->>>>>>> checkpoint-bloc-chat-set-username
 import App from './App';
-import styled from 'styled-components';
-//import { createGlobalStyle } from 'styled-components';
 import * as serviceWorker from './serviceWorker';
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> checkpoint-bloc-chat-set-username
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
