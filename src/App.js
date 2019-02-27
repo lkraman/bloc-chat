@@ -47,22 +47,28 @@ class App extends Component {
 
   render() {
     return (
-      <main className="wrapper">
+      <main className="container">
         <header className="app-title">
-          <h1>Bloc Chat</h1>
+          <h1>Delaware's Community Garden</h1>
           <h2>Current Room: {this.state.activeRoom}</h2>
-          <section>
+          </header>
+          <section className="row">
+          <div className="col" id="user-1-of-1">
             <User firebase={firebase} user={this.state.user} setUserName={this.setUserName} />
+            </div>
           </section>
-        </header>
-        <section className="rows">
-          <section className="room-list">
+
+        <section className="row">
+          <div className="col" id="roomlist-1-of-2">
             <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom} />
+            </div>
           </section>
-          <section className="message-list">
+
+          <section className="row">
+            <div className="col" id="messagelist-2-of-2">
             <MessageList firebase={firebase} activeRoomId={this.state.activeRoomId} />
+            </div>
           </section>
-        </section>
       </main>
     );
   }
