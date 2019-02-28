@@ -56,7 +56,6 @@ class User extends Component {
 
   render() {
     return(
-
       <div className="user">
         <section className="btn-group">
          <button type="button" onClick={this.signIn}>Sign In with Google</button>

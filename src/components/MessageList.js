@@ -8,8 +8,7 @@ class MessageList extends Component {
         messages:  [{
           username: "",
           content: "",
-           sentAt: "",
-           roomId: ""
+           roomId: "",
          }],
         newMessage:"",
       };
@@ -47,9 +46,7 @@ class MessageList extends Component {
 
 
 
-
     render() {
-
       return (
         <section className="messages">
           {this.state.messages
@@ -58,7 +55,6 @@ class MessageList extends Component {
               <ul className="message-group" key={messages.key}>
                 <div>{messages.username}</div>
                 <div>{messages.content}</div>
-                <div>{messages.sentAt}</div>
               </ul>
             ))}
           <form className="enter-message" onSubmit={this.createMessage}>
