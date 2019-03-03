@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 import User from './components/User';
-
+import './reset.css';
 import './App.css';
 import * as firebase from 'firebase';
-
+import fire from 'firebase';
 
 var config = {
   apiKey: "AIzaSyAfTbKtXZUD0PZzJxGECO3unfiv10ZqX0w",
@@ -17,7 +16,6 @@ var config = {
   messagingSenderId: "596845905245"
 };
 firebase.initializeApp(config);
-
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +28,6 @@ class App extends Component {
     };
     this.setActiveRoom = this.setActiveRoom.bind(this);
     this.setUserName = this.setUserName.bind(this);
-    
   }
 
   setActiveRoom(room) {
@@ -50,26 +47,26 @@ class App extends Component {
     return (
       <main className="container">
         <header className="app-title">
-          <h1>Delaware's Community Garden</h1>
+        <div id='item1' className="item">
+          <h1>Bloc Chat</h1>
+          </div>
+          <div id='item2' className="item">
           <h2>Current Room: {this.state.activeRoom}</h2>
-          </header>
-          <section className="row">
-          <div className="col" id="user-1-of-1">
+          </div>
+           <div id='item3' className="item">
             <User firebase={firebase} user={this.state.user} setUserName={this.setUserName} />
-            </div>
-          </section>
-        <section className="row">
-          <div className="col" id="roomlist-1-of-2">
+          </div>
+        </header>
+         <div id='item4' className="item">
+
             <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom} />
-            </div>
-          </section>
-          <section className="row">
-            <div className="col" id="messagelist-2-of-2">
+          </div>
+           <div id='item5' className="item">
             <MessageList firebase={firebase} activeRoomId={this.state.activeRoomId} />
-            </div>
-          </section>
+          </div>
       </main>
     );
   }
 }
- export default App;
+
+export default App;

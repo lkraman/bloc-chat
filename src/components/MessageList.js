@@ -4,28 +4,11 @@ import React, { Component } from 'react';
 class MessageList extends Component {
   constructor(props) {
     super(props);
-      this.state = {
-        messages:  [{
-          username: "",
-          content: "",
-           roomId: "",
-         }],
-        newMessage:"",
-      };
+      this.state = { messages:  [{username: "", content: "", sentAt: "", roomId: ""},], newMessage:""};
       this.messagesRef = this.props.firebase.database().ref("messages");
       this.handleChange = this.handleChange.bind(this);
       this.createMessage = this.createMessage.bind(this);
   }
-
-
-    componentDidMount() {
-      this.messagesRef.on('child_added', snapshot => {
-        const message = snapshot.val();
-        message.key = snapshot.key;
-        this.setState({ messages: this.state.messages.concat(message) })
-      });
-    }
-
 
   handleChange(e) {
     e.preventDefault();
@@ -44,6 +27,24 @@ class MessageList extends Component {
     }
 
 
+  componentDidMount() {
+    this.messagesRef.on('child_added', snapshot => {
+      const message = snapshot.val();
+      message.key = snapshot.key;
+      this.setState({ messages: this.state.messages.concat(message) })
+    });
+  }
+
+  formatTime(time) {
+  if (time){
+     const date = new Date(time);
+     const hour = date.getHours();
+     const min = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+     const sec = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+     const newTime = hour + ':' + min + ':' + sec;
+     return newTime;
+   }
+}
 
 
     render() {
@@ -52,15 +53,16 @@ class MessageList extends Component {
           {this.state.messages
             .filter(messages => messages.roomId === this.props.activeRoomId)
             .map(messages => (
-              <ul className="message-group" key={messages.key}>
+              <div className="message-group" key={messages.key}>
                 <div>{messages.username}</div>
                 <div>{messages.content}</div>
-              </ul>
+                <div>{this.formatTime(messages.sentAt)}</div>
+              </div>
             ))}
-          <form className="enter-message" onSubmit={this.createMessage}>
+          <form className="add-message" onSubmit={this.createMessage}>
             <input
               type="text"
-              placeholder="Enter Message"
+              placeholder="Write Your Message Here"
               value={this.state.newMessage}
               onChange={this.handleChange}
             />
@@ -71,4 +73,4 @@ class MessageList extends Component {
     }
   }
 
-  export default MessageList;
+export default MessageList;

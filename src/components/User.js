@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import fire from '../App';
 
 
@@ -28,14 +27,8 @@ class User extends Component {
 
   signIn() {
     const provider = new this.props.firebase.auth.GoogleAuthProvider();
-    this.props.firebase.auth().signInWithPopup(provider).then((result) => {
-    const user = result.user;
-    this.props.setUser(user);
-   })
-   .catch(function(error) {
-       console.log(error);
-    });
- }
+    this.props.firebase.auth().signInWithPopup(provider);
+  }
 
   signOut() {
     this.props.firebase.auth().signOut().then(() => {
@@ -43,6 +36,7 @@ class User extends Component {
   })
   .catch(function(error) {
        console.log(error);
+       console.log('Failed to Sign Out');
   });
 }
 
@@ -56,15 +50,12 @@ class User extends Component {
 
   render() {
     return(
-      <div className="user">
-        <section className="btn-group">
-         <button type="button" onClick={this.signIn}>Sign In with Google</button>
-         <button type="button" onClick={this.signOut}>Sign Out</button>
-
-         <section className="display-username">
+      <div>
+         <button onClick={this.signIn}>Sign In</button>
+         <button onClick={this.signOut}>Sign Out</button>
+         <section className="sign-in">
             Sign In As:
             {this.props.user ? this.props.user.displayName : 'Guest'}
-          </section>
           </section>
        </div>
 
