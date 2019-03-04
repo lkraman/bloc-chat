@@ -8,6 +8,7 @@ class MessageList extends Component {
       this.messagesRef = this.props.firebase.database().ref("messages");
       this.handleChange = this.handleChange.bind(this);
       this.createMessage = this.createMessage.bind(this);
+      this.formatTime = this.formatTime.bind(this);
   }
 
   handleChange(e) {

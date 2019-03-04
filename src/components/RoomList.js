@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 
-
-
-
 class RoomList extends Component {
   constructor(props) {
     super(props);
@@ -46,13 +43,13 @@ class RoomList extends Component {
         placeholder="Enter Room Name"
         onChange={this.handleChange}
         />
-      <button>Submit</button>
+      <button>Enter</button>
 
       </form>
     );
 
     const roomList = this.state.rooms.map((room) =>
-      <div key={room.key} onClick={(e) => this.selectRoom(room, e)}>{room.title}</div>
+      <div key={room.key} onClick={(e) => this.props.setActiveRoom(room, e)}>{room.title}</div>
     );
 
     return(

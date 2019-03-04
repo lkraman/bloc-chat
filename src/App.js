@@ -32,7 +32,7 @@ class App extends Component {
 
   setActiveRoom(room) {
     this.setState({
-      activeRoom: room.name,
+      activeRoom: room.title,
       activeRoomId: room.key,
     });
   }
@@ -44,29 +44,29 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <main className="container">
-        <header className="app-title">
-        <div id='item1' className="item">
-          <h1>Bloc Chat</h1>
-          </div>
-          <div id='item2' className="item">
-          <h2>Current Room: {this.state.activeRoom}</h2>
-          </div>
-           <div id='item3' className="item">
-            <User firebase={firebase} user={this.state.user} setUserName={this.setUserName} />
-          </div>
-        </header>
-         <div id='item4' className="item">
+   return (
+     <main className="container">
+       <header className="app-title">
+       <div id='item1' className="item">
+         <h1>Bloc Chat</h1>
+         </div>
+         <div id='item2' className="item">
+         <h2>Current Room: {this.state.activeRoom}</h2>
+         </div>
+          <div id='item3' className="item">
+           <User firebase={firebase} user={this.state.user} setUserName={this.setUserName} />
+         </div>
+       </header>
+        <div id='item4' className="item">
 
-            <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom} />
-          </div>
-           <div id='item5' className="item">
-            <MessageList firebase={firebase} activeRoomId={this.state.activeRoomId} />
-          </div>
-      </main>
-    );
-  }
+           <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom} />
+         </div>
+          <div id='item5' className="item">
+           <MessageList firebase={firebase} user={this.state.user} activeRoomId={this.state.activeRoomId} />
+         </div>
+     </main>
+   );
+ }
 }
 
 export default App;
