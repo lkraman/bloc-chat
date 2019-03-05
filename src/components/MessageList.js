@@ -22,7 +22,7 @@ class MessageList extends Component {
         username: this.props.user ? this.props.user.displayName : 'Guest',
         content: this.state.newMessage,
         sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-        roomId: this.props.activeRoomId,
+        roomId: this.props.activeRoom,
       })
       this.setState({newMessage: ''});
     }
@@ -52,13 +52,13 @@ class MessageList extends Component {
       return (
         <section className="messages">
           {this.state.messages
-            .filter(messages => messages.roomId === this.props.activeRoomId)
-            .map(messages => (
-              <div className="message-group" key={messages.key}>
+            .filter(messages => messages.roomId === this.props.activeRoom)
+            .map((messages, i) => (
+              <ul className="message-group" key={i}>
                 <div>{messages.username}</div>
                 <div>{messages.content}</div>
                 <div>{this.formatTime(messages.sentAt)}</div>
-              </div>
+              </ul>
             ))}
           <form className="add-message" onSubmit={this.createMessage}>
             <input
