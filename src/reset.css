@@ -15,8 +15,9 @@ html {
   /* border-box box model allows us to add padding and border to our elements without increasing their size */
   box-sizing: border-box;
   /* A system font stack so things load nice and quick! */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+
+  font-family: 'Roboto', sans-serif;
   font-weight: 900;
   font-size: 10px;
   color: var(--black);
@@ -52,17 +53,3 @@ h6 {
   margin: 0 0 5px 0;
 }
 /* Each item in our grid will contain numbers */
-.item {
-  /* We center the contents of these items. You can also do this with flexbox too! */
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  border: 5px solid rgba(0, 0, 0, 0.03);
-  border-radius: 3px;
-  font-size: 35px;
-  background-color: var(--yellow); /* best colour */
-}
-
-.item p {
-  margin: 0 0 5px 0;
-}

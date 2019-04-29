@@ -43,7 +43,7 @@ class RoomList extends Component {
         placeholder="Enter Room Name"
         onChange={this.handleChange}
         />
-      <button>Enter</button>
+      <button id='submit'>Enter</button>
 
       </form>
     );

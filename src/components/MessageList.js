@@ -67,7 +67,7 @@ class MessageList extends Component {
               value={this.state.newMessage}
               onChange={this.handleChange}
             />
-            <input type="submit" value="Send" />
+            <input id='submit' type="submit" value="Send" />
           </form>
         </section>
       );

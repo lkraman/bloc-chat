@@ -43,7 +43,8 @@ class App extends Component {
 
   render() {
    return (
-     <main className="container">
+
+     <main className="grid">
        <header className="app-title">
        <div id='item1' className="item">
          <h1>Bloc Chat</h1>
@@ -63,6 +64,7 @@ class App extends Component {
            <MessageList firebase={firebase} user={this.state.user} activeRoom={this.state.activeRoom} key={3} />
          </div>
      </main>
+
    );
  }
 }

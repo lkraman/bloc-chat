@@ -29,6 +29,7 @@ class User extends Component {
         <div>
           <section className="user">
             <button
+              id='user-button'
               type="button"
               className="user-sign-in"
               onClick={this.signIn}
@@ -36,6 +37,7 @@ class User extends Component {
             Sign In
             </button>
             <button
+              id='user-button'
               type="button"
               className="user-sign-out"
               onClick={this.signOut}>
